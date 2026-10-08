@@ -10,11 +10,7 @@
 
 ### 2: Initialize a Git repository, and commit the README and `.gitignore`
 
-<!-- No command/output needed here -- we check the repo directly. -->
-
 ### 3: Commit throughout the assignment
-
-<!-- No command/output needed here -- we check your commit history directly. -->
 
 ------------------------------------------------------------------------
 
@@ -22,15 +18,13 @@
 
 ### 4: Predict the output of `echo.sh`
 
-<!-- No need to paste the script: we'll look at scripts/echo.sh directly. -->
+*Answer* (prediction and reasoning for `bash scripts/echo.sh Oct07 Oct08`): Error. There are only 2 "arguments" being "Oct 07" and "Oct08". The script needs 3 variables since the "set -euo pipefail command" is set in place. If this wasn't set it place, it would execute the first 2 lines of echo, give a blank for the 3rd variable, and still print the "Finished"
 
-*Answer* (prediction and reasoning for `bash scripts/echo.sh Oct07 Oct08`):
+*Answer* (prediction and reasoning for `bash scripts/echo.sh Oct07 Oct08 Oct09 Oct10`):I predict that the script will run on the first three variables, and nothing will happen with the "Oct 10". That or it may give an error that there is an unassigned variable. 
 
-*Answer* (prediction and reasoning for `bash scripts/echo.sh Oct07 Oct08 Oct09 Oct10`):
+*Answer* (prediction and reasoning for `bash scripts/echo.sh Oct07 Oct08 "Oct09 Oct10"`):I predict the script will run, but the "Oct 09 Oct10" will be together on the third line
 
-*Answer* (prediction and reasoning for `bash scripts/echo.sh Oct07 Oct08 "Oct09 Oct10"`):
-
-*Answer* (prediction and reasoning for `bash scripts/echo.sh results/fastqc/*.html`):
+*Answer* (prediction and reasoning for `bash scripts/echo.sh results/fastqc/*.html`):I think maybe the script will run multiple times with the third variable changing to include all the files that include .html
 
 ### 5: Run `echo.sh` and compare with your predictions
 
@@ -40,7 +34,10 @@ bash scripts/echo.sh Oct07 Oct08
 
 The output of the command was:
 
-```         
+```
+Oct07
+Oct08
+scripts/echo.sh: line 6: $3: unbound variable         
 ```
 
 ```bash
@@ -49,7 +46,11 @@ bash scripts/echo.sh Oct07 Oct08 Oct09 Oct10
 
 The output of the command was:
 
-```         
+```    
+Oct07
+Oct08
+Oct09
+Finished     
 ```
 
 ```bash
@@ -58,7 +59,11 @@ bash scripts/echo.sh Oct07 Oct08 "Oct09 Oct10"
 
 The output of the command was:
 
-```         
+```
+Oct07
+Oct08
+Oct09 Oct10
+Finished         
 ```
 
 ```bash
@@ -67,10 +72,14 @@ bash scripts/echo.sh results/fastqc/*.html
 
 The output of the command was:
 
-```         
+```
+results/fastqc/S63_R1_fastqc.html
+results/fastqc/S63_R2_fastqc.html
+scripts/echo.sh: line 6: $3: unbound variable         
 ```
 
 *Answer*: Which output (if any) differed from your prediction, and why?
+The output of the last command was different from my prediction. When I made my prediction I was looking at results as variable one, fastqc as variable 2, and *.html as variable 3. It looks as if this command was able to print the files  
 
 ### 6: Write the `printline.sh` script
 
@@ -81,23 +90,28 @@ The output of the command was:
 Test 1:
 
 ```bash
-# Your command:
+bash scripts/printline.sh data/metadata.tsv 3
 ```
 
 The output of the command was:
 
-```         
+```
+S75     10dpi   cathemerium
 ```
 
 Test 2 (with redirection), and checking the contents of the output file:
 
 ```bash
-# Your command:
+#I added printline directory first
+mkdir results/printline
+bash scripts/printline.sh data/metadata.tsv 4 > results/printline/line_4.txt
+cat results/printline/line_4.txt 
 ```
 
 The output of the command that checks the file contents was:
 
 ```         
+S79     10dpi   cathemerium
 ```
 
 ------------------------------------------------------------------------
