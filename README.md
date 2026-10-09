@@ -178,9 +178,9 @@ bash scripts/multiqc.sh results/multiqc/ results/fastqc/
 
 ### 14: The structure of the Pandoc command
 
-*Answer* (options and arguments, and what each does):
+*Answer* (options and arguments, and what each does):The "-o" option is for output file (i used the --help). Then the arguments are what you want to convert it to and what the file currently is
 
-*Answer* (how does Pandoc know which output format to produce?):
+*Answer* (how does Pandoc know which output format to produce?):based on the ".extension" in the first argument
 
 ### 15: Render your README to PDF and HTML
 
@@ -191,16 +191,17 @@ pandoc -o README.pdf README.md
 - Command to render to HTML:
 
 ```bash
-# Your command:
+pandoc -o README.html README.md
 ```
 
 ### 16: Should the rendered files be committed?
 
-*Answer*: Should the rendered files be committed to your Git repo? Why/why not?
+*Answer*: 
+No, they should not be committed. This is similar to the reason to not commit results. Since we have the script or information to easily derive this file, we should commit the file that is at the source (the readme.md file). If we ever need to share and convert to a different type of file, we need only to use the `pandoc` command.
 
 ### 17: Install the PDF Viewer extension and view the PDF
 
-*Answer*: One observation about the rendered PDF file:
+*Answer*: The coding blocks are not easily distinguishable as they are on markdown
 
 ## Part E: Publish your repo on GitHub
 
