@@ -1,7 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 
-#MultiQC container: oras://community.wave.seqera.io/library/multiqc:1.35--562c547b518ebe20
+#MultiQC container:
+CONTAINER=oras://community.wave.seqera.io/library/multiqc:1.35--562c547b518ebe20
+
+# Copy the placeholder variables
+outdir="$1"
+input="$2"
 
 # Initial logging
 echo "Starting script multiqc.sh"
@@ -10,7 +15,7 @@ date
 mkdir -p results/multiqc
 
 # Run multiQC with its container
-apptainer exec oras://community.wave.seqera.io/library/multiqc:1.35--562c547b518ebe20 multiqc --outdir results/multiqc results/fastqc
+apptainer exec "$CONTAINER" multiqc --outdir "$outdir" "$input"
 
 # Final logging
 echo
